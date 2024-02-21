@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { listGuides } from "../Services/GuideService";
+import { deleteGuide, listGuides } from "../Services/GuideService";
 import { useNavigate } from "react-router-dom";
 
 const GuideList = () => {
   const [guides, setGuides] = useState([]);
 
   useEffect(() => {
+    getAllGuides();
+  }, []);
+
+  function getAllGuides() {
     listGuides()
       .then((response) => {
         setGuides(response.data);
@@ -13,7 +17,7 @@ const GuideList = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }
 
   const navigate = useNavigate();
 
@@ -23,11 +27,23 @@ const GuideList = () => {
   }
 
   function addNewGuide() {
-    navigate(`/Add_Guide`);
+    navigate(`/Guide_Signup`);
   }
 
   function updateGuide(id) {
     navigate(`/Update_Guide/${id}`);
+  }
+
+  function removeGuide(id) {
+    console.log(id);
+
+    deleteGuide(id)
+      .then((response) => {
+        getAllGuides()
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   return (
@@ -65,6 +81,12 @@ const GuideList = () => {
                   onClick={() => updateGuide(guide.id)}
                 >
                   Update
+                </button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => removeGuide(guide.id)}
+                >
+                  Delete
                 </button>
               </td>
             </tr>

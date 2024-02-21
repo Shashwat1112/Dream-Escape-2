@@ -50,33 +50,52 @@ const GuideSignup = () => {
     e.preventDefault();
 
     if (validateForm()) {
-
       const guide = { name, email, mobile, date, password, gender };
       console.log(guide);
 
-      if(id){
-        updateGuide(id, guide).then((reponse)=>{
-          console.log(reponse.data);
-          navigator('/Guide_Login')
-        }).catch(error=>{
-          console.error(error);
-        })
-      }else{
+      if (id) {
+        updateGuide(id, guide)
+          .then((reponse) => {
+            console.log(reponse.data);
+            navigator("/Guide_List");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
         createGuide(guide)
-        .then((response) => {
-          console.log(response.data);
-          navigator("/Guide_Login");
-        }).catch(error=>{
-          console.error(error);
-        })
+          .then((response) => {
+            console.log(response.data);
+            navigator("/Guide_List");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
 
-      
-        // .catch((error) => {
-        //   console.error("Error registering guide:", error);
-        // });
+      // .catch((error) => {
+      //   console.error("Error registering guide:", error);
+      // });
     }
   };
+
+  // function saveOrUpdateGuide(e){
+  //   e.preventDefault();
+
+  //   if (validateForm()) {
+
+  //     const guide = { name, email, mobile, date, password, gender };
+  //     console.log(guide);
+
+  //     if(id){
+  //       updateGuide(id,guide).then((response)=>{
+  //         console.log(response.data);
+  //         navigator("/Guide_Signup")
+  //       }).catch(error=>{
+  //         console.error(err)
+  //       })
+  //     }
+  // }
 
   function validateForm() {
     let valid = true;
@@ -155,13 +174,13 @@ const GuideSignup = () => {
 
     return valid;
   }
-   
+
   //Function for dynamically change of heading
   function pageTitle() {
     if (id) {
       return <h2 className="text-center">Update Guide Details</h2>;
     } else {
-      return <h2 className="text-center">Add Customer</h2>;
+      return <h2 className="text-center">Add Guide</h2>;
     }
   }
 
@@ -306,7 +325,7 @@ const GuideSignup = () => {
               </div>
 
               <button className="btn btn-success" onClick={saveOrUpdateGuide}>
-                Register
+                Submit
               </button>
               <link path=""></link>
             </form>
@@ -319,3 +338,4 @@ const GuideSignup = () => {
 };
 
 export default GuideSignup;
+

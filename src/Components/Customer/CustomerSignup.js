@@ -1,7 +1,219 @@
+// // import React, { useState } from "react";
+// // import { Link } from "react-router-dom";
+// // import { createCustomer } from "../Services/CustomerService";
+// // import { useNavigate } from "react-router-dom";
+
+// // const CustomerSignup = () => {
+// //   const [name, setName] = useState("");
+// //   const [email, setEmail] = useState("");
+// //   const [mobile, setMobile] = useState("");
+// //   const [date, setDate] = useState("");
+// //   const [password, setPassword] = useState("");
+// //   const [gender, setGender] = useState("");
+
+// //   const [errors, setErrors] = useState({
+// //     name: "",
+// //     email: "",
+// //     mobile: "",
+// //     date: "",
+// //     password: "",
+// //     gender: "",
+// //   });
+
+// //   const navigator = useNavigate();
+
+// //   const handleName = (e) => setName(e.target.value);
+// //   const handleEmail = (e) => setEmail(e.target.value);
+// //   const handleMobile = (e) => setMobile(e.target.value);
+// //   const handleDate = (e) => setDate(e.target.value);
+// //   const handlePassword = (e) => setPassword(e.target.value);
+// //   const handleGender = (e) => setGender(e.target.value);
+
+// //   const saveCustomer = (e) => {
+// //     e.preventDefault();
+
+// //     if (validateForm()) {
+// //       const customer = { name, email, mobile, date, password, gender };
+// //       console.log(customer);
+
+// //       createCustomer(customer)
+// //         .then((response) => {
+// //           console.log(response.data);
+// //           navigator("/Customer_Login");
+// //           // alert("Customer has been registered successfully!");
+// //           // // Refresh the page
+// //           // window.location.reload();
+// //         })
+// //         .catch((error) => {
+// //           console.error("Error registering customer:", error);
+// //           alert("Error registering customer. Please try again.");
+// //         });
+// //     }
+// //   };
+
+// //   function validateForm() {
+// //     let valid = true;
+// //     const errorsCopy = { ...errors };
+
+// //     if (name.trim()) {
+// //       errorsCopy.name = "";
+// //     } else {
+// //       errorsCopy.name = "Name can't be null";
+// //       valid = false;
+// //     }
+
+// //     if (email.trim()) {
+// //       errorsCopy.email = "";
+// //     } else {
+// //       errorsCopy.email = "Email is required";
+// //       // valid = false;
+// //     }
+
+// //     setErrors(errorsCopy);
+
+// //     return valid;
+// //   }
+
+// //   return (
+// //     <div className="container">
+// //       <br></br>
+// //       <div className="row">
+// //         <div className="card col-md-6 offset-md-3">
+// //           <h2 className="text-center">Customer Registration</h2>
+// //           <div className="card-body">
+// //             <form>
+// //               <div className="form-group mb-2">
+// //                 <label className="form-label">Name</label>
+// //                 <input
+// //                   type="text"
+// //                   placeholder="Enter full name"
+// //                   name="name"
+// //                   value={name}
+// //                   className={`form-control ${errors.name ? `is-invalid` : ``}`}
+// //                   onChange={handleName}
+// //                 ></input>
+// //                 {errors.name && (
+// //                   <div className="invalid-feedback">{errors.name}</div>
+// //                 )}
+// //               </div>
+
+// //               <div className="form-group mb-2">
+// //                 <label className="form-label">Email Id</label>
+// //                 <input
+// //                   type="email"
+// //                   placeholder="Enter email address"
+// //                   name="email"
+// //                   value={email}
+// //                   className={`form-control ${errors.email ? `is-invalid` : ``}`}
+// //                   onChange={handleEmail}
+// //                 ></input>
+// //                 {errors.email && (
+// //                   <div className="invalid-feedback">{errors.email}</div>
+// //                 )}
+// //               </div>
+
+// //               <div className="form-group mb-2">
+// //                 <label className="form-label">Mobile Number</label>
+// //                 <input
+// //                   type="tel"
+// //                   placeholder="Enter mobile number"
+// //                   name="mobile"
+// //                   value={mobile}
+// //                   className="form-control"
+// //                   onChange={handleMobile}
+// //                 ></input>
+// //               </div>
+
+// //               <div className="form-group mb-2">
+// //                 <label className="form-label">Date of Birth</label>
+// //                 <input
+// //                   type="date"
+// //                   name="date"
+// //                   value={date}
+// //                   className="form-control"
+// //                   onChange={handleDate}
+// //                 ></input>
+// //               </div>
+
+// //               <div className="form-group mb-2">
+// //                 <label className="form-label">Password</label>
+// //                 <input
+// //                   type="password"
+// //                   placeholder="Enter password"
+// //                   name="password"
+// //                   value={password}
+// //                   className="form-control"
+// //                   onChange={handlePassword}
+// //                 ></input>
+// //               </div>
+
+// //               <div className="form-group mb-2">
+// //                 <label className="form-label">Gender</label>
+
+// //                 <div className="form-check">
+// //                   <input
+// //                     type="radio"
+// //                     id="male"
+// //                     name="gender"
+// //                     value="male"
+// //                     checked={gender === "male"}
+// //                     className="form-check-input"
+// //                     onChange={handleGender}
+// //                   />
+// //                   <label htmlFor="male" className="form-check-label">
+// //                     Male
+// //                   </label>
+// //                 </div>
+
+// //                 <div className="form-check">
+// //                   <input
+// //                     type="radio"
+// //                     id="female"
+// //                     name="gender"
+// //                     value="female"
+// //                     checked={gender === "female"}
+// //                     className="form-check-input"
+// //                     onChange={handleGender}
+// //                   />
+// //                   <label htmlFor="female" className="form-check-label">
+// //                     Female
+// //                   </label>
+// //                 </div>
+
+// //                 <div className="form-check">
+// //                   <input
+// //                     type="radio"
+// //                     id="other"
+// //                     name="gender"
+// //                     value="other"
+// //                     checked={gender === "other"}
+// //                     className="form-check-input"
+// //                     onChange={handleGender}
+// //                   />
+// //                   <label htmlFor="other" className="form-check-label">
+// //                     Other
+// //                   </label>
+// //                 </div>
+// //               </div>
+
+// //               <button className="btn btn-success" onClick={saveCustomer}>
+// //                 Register
+// //               </button>
+// //               <link path=""></link>
+// //             </form>
+// //           </div>
+// //         </div>
+// //       </div>
+// //       <br></br>
+// //     </div>
+// //   );
+// // };
+
+// // export default CustomerSignup;
+
 // import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-// import { createCustomer } from "../Services/CustomerService";
-// import { useNavigate } from "react-router-dom";
+// import { Link, useNavigate, useParams } from "react-router-dom";
+// import { createCustomer, updateCustomer } from "../Services/CustomerService";
 
 // const CustomerSignup = () => {
 //   const [name, setName] = useState("");
@@ -10,6 +222,8 @@
 //   const [date, setDate] = useState("");
 //   const [password, setPassword] = useState("");
 //   const [gender, setGender] = useState("");
+
+//   const { id } = useParams();
 
 //   const [errors, setErrors] = useState({
 //     name: "",
@@ -22,6 +236,23 @@
 
 //   const navigator = useNavigate();
 
+//   useEffect(() => {
+//     if (id) {
+//       getCustomer(id)
+//         .then((response) => {
+//           setName(response.data.name);
+//           setEmail(response.data.email);
+//           setMobile(response.data.mobile);
+//           setDate(response.data.date);
+//           setPassword(response.data.password);
+//           setGender(response.data.gender);
+//         })
+//         .catch((error) => {
+//           console.error(error);
+//         });
+//     }
+//   }, [id]);
+
 //   const handleName = (e) => setName(e.target.value);
 //   const handleEmail = (e) => setEmail(e.target.value);
 //   const handleMobile = (e) => setMobile(e.target.value);
@@ -29,25 +260,42 @@
 //   const handlePassword = (e) => setPassword(e.target.value);
 //   const handleGender = (e) => setGender(e.target.value);
 
-//   const saveCustomer = (e) => {
+//   const saveOrUpdateCustomer = (e) => {
 //     e.preventDefault();
 
 //     if (validateForm()) {
 //       const customer = { name, email, mobile, date, password, gender };
 //       console.log(customer);
 
-//       createCustomer(customer)
-//         .then((response) => {
-//           console.log(response.data);
-//           navigator("/Customer_Login");
-//           // alert("Customer has been registered successfully!");
-//           // // Refresh the page
-//           // window.location.reload();
-//         })
-//         .catch((error) => {
-//           console.error("Error registering customer:", error);
-//           alert("Error registering customer. Please try again.");
-//         });
+//       // createCustomer(customer)
+//       //   .then((response) => {
+//       //     console.log(response.data);
+//       //     alert("Customer has been registered successfully!");
+//       //     navigator("/Customer_Login");
+//       //   })
+//       //   .catch((error) => {
+//       //     console.error("Error registering customer:", error);
+//       //     alert("Error registering customer. Please try again.");
+//       //   });
+
+//       if (id) {
+//         updateCustomer(id, customer)
+//           .then((reponse) => {
+//             console.log(reponse.data);
+//             navigator("/Customer_List");
+//           })
+//           .catch((error) => {
+//             console.error(error);
+//           });
+//       } else {
+//         createCustomer(customer)
+//           .then((response) => {
+//             console.log(response.data);
+//             navigator("/Customer_List");
+//           })
+//           .catch((error) => {
+//             console.error(error);
+//           });
 //     }
 //   };
 
@@ -55,18 +303,70 @@
 //     let valid = true;
 //     const errorsCopy = { ...errors };
 
+//     // Name validation
 //     if (name.trim()) {
 //       errorsCopy.name = "";
 //     } else {
-//       errorsCopy.name = "Name can't be null";
+//       errorsCopy.name = "Name is required";
 //       valid = false;
 //     }
 
+//     // Email validation
 //     if (email.trim()) {
-//       errorsCopy.email = "";
+//       if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+//         errorsCopy.email = "";
+//       } else {
+//         errorsCopy.email = "Invalid email format";
+//         valid = false;
+//       }
 //     } else {
 //       errorsCopy.email = "Email is required";
-//       // valid = false;
+//       valid = false;
+//     }
+
+//     // Mobile validation
+//     if (mobile.trim()) {
+//       if (/^\d{10}$/.test(mobile)) {
+//         errorsCopy.mobile = "";
+//       } else {
+//         errorsCopy.mobile = "Invalid mobile number format";
+//         valid = false;
+//       }
+//     } else {
+//       errorsCopy.mobile = "Mobile number is required";
+//       valid = false;
+//     }
+
+//     // Date validation
+//     if (date.trim()) {
+//       // You can add more specific date validation if needed
+//       errorsCopy.date = "";
+//     } else {
+//       errorsCopy.date = "Date of birth is required";
+//       valid = false;
+//     }
+
+//     // Password validation
+//     if (password.trim()) {
+//       if (password.length >= 8) {
+//         // You can add more specific password validation if needed
+//         errorsCopy.password = "";
+//       } else {
+//         errorsCopy.password = "Password must be at least 8 characters";
+//         valid = false;
+//       }
+//     } else {
+//       errorsCopy.password = "Password is required";
+//       valid = false;
+//     }
+
+//     // Gender validation
+//     if (gender.trim()) {
+//       // You can add more specific gender validation if needed
+//       errorsCopy.gender = "";
+//     } else {
+//       errorsCopy.gender = "Gender is required";
+//       valid = false;
 //     }
 
 //     setErrors(errorsCopy);
@@ -74,12 +374,22 @@
 //     return valid;
 //   }
 
+//   //Function for dynamically change of heading
+//   function pageTitle() {
+//     if (id) {
+//       return <h2 className="text-center">Update Customer Details</h2>;
+//     } else {
+//       return <h2 className="text-center">Add Customer</h2>;
+//     }
+//   }
+
 //   return (
 //     <div className="container">
 //       <br></br>
 //       <div className="row">
 //         <div className="card col-md-6 offset-md-3">
-//           <h2 className="text-center">Customer Registration</h2>
+//           {/* <h2 className="text-center">Customer Registration</h2> */}
+//           {pageTitle()}
 //           <div className="card-body">
 //             <form>
 //               <div className="form-group mb-2">
@@ -119,9 +429,14 @@
 //                   placeholder="Enter mobile number"
 //                   name="mobile"
 //                   value={mobile}
-//                   className="form-control"
+//                   className={`form-control ${
+//                     errors.mobile ? `is-invalid` : ``
+//                   }`}
 //                   onChange={handleMobile}
 //                 ></input>
+//                 {errors.mobile && (
+//                   <div className="invalid-feedback">{errors.mobile}</div>
+//                 )}
 //               </div>
 
 //               <div className="form-group mb-2">
@@ -130,9 +445,12 @@
 //                   type="date"
 //                   name="date"
 //                   value={date}
-//                   className="form-control"
+//                   className={`form-control ${errors.date ? `is-invalid` : ``}`}
 //                   onChange={handleDate}
 //                 ></input>
+//                 {errors.date && (
+//                   <div className="invalid-feedback">{errors.date}</div>
+//                 )}
 //               </div>
 
 //               <div className="form-group mb-2">
@@ -142,9 +460,14 @@
 //                   placeholder="Enter password"
 //                   name="password"
 //                   value={password}
-//                   className="form-control"
+//                   className={`form-control ${
+//                     errors.password ? `is-invalid` : ``
+//                   }`}
 //                   onChange={handlePassword}
 //                 ></input>
+//                 {errors.password && (
+//                   <div className="invalid-feedback">{errors.password}</div>
+//                 )}
 //               </div>
 
 //               <div className="form-group mb-2">
@@ -194,6 +517,10 @@
 //                     Other
 //                   </label>
 //                 </div>
+
+//                 {errors.gender && (
+//                   <div className="invalid-feedback">{errors.gender}</div>
+//                 )}
 //               </div>
 
 //               <button className="btn btn-success" onClick={saveCustomer}>
@@ -209,11 +536,13 @@
 //   );
 // };
 
-// export default CustomerSignup;
+// export default CustomerSignup
 
-import React, { useState } from "react";
+
+
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { createCustomer } from "../Services/CustomerService";
+import { createCustomer, getCustomer, updateCustomer } from "../Services/CustomerService";
 
 const CustomerSignup = () => {
   const [name, setName] = useState("");
@@ -236,6 +565,23 @@ const CustomerSignup = () => {
 
   const navigator = useNavigate();
 
+  useEffect(() => {
+    if (id) {
+      getCustomer(id)
+        .then((response) => {
+          setName(response.data.name);
+          setEmail(response.data.email);
+          setMobile(response.data.mobile);
+          setDate(response.data.date);
+          setPassword(response.data.password);
+          setGender(response.data.gender);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [id]);
+
   const handleName = (e) => setName(e.target.value);
   const handleEmail = (e) => setEmail(e.target.value);
   const handleMobile = (e) => setMobile(e.target.value);
@@ -248,18 +594,26 @@ const CustomerSignup = () => {
 
     if (validateForm()) {
       const customer = { name, email, mobile, date, password, gender };
-      console.log(customer);
 
-      createCustomer(customer)
-        .then((response) => {
-          console.log(response.data);
-          alert("Customer has been registered successfully!");
-          navigator("/Customer_Login");
-        })
-        .catch((error) => {
-          console.error("Error registering customer:", error);
-          alert("Error registering customer. Please try again.");
-        });
+      if (id) {
+        updateCustomer(id, customer)
+          .then((response) => {
+            console.log(response.data);
+            navigator("/Customer_List");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        createCustomer(customer)
+          .then((response) => {
+            console.log(response.data);
+            navigator("/Customer_List");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     }
   };
 
@@ -338,7 +692,7 @@ const CustomerSignup = () => {
     return valid;
   }
 
-  //Function for dynamically change of heading
+  // Function for dynamically changing the heading
   function pageTitle() {
     if (id) {
       return <h2 className="text-center">Update Customer Details</h2>;
@@ -349,10 +703,9 @@ const CustomerSignup = () => {
 
   return (
     <div className="container">
-      <br></br>
+      <br />
       <div className="row">
         <div className="card col-md-6 offset-md-3">
-          {/* <h2 className="text-center">Customer Registration</h2> */}
           {pageTitle()}
           <div className="card-body">
             <form>
@@ -365,10 +718,8 @@ const CustomerSignup = () => {
                   value={name}
                   className={`form-control ${errors.name ? `is-invalid` : ``}`}
                   onChange={handleName}
-                ></input>
-                {errors.name && (
-                  <div className="invalid-feedback">{errors.name}</div>
-                )}
+                />
+                {errors.name && <div className="invalid-feedback">{errors.name}</div>}
               </div>
 
               <div className="form-group mb-2">
@@ -380,10 +731,8 @@ const CustomerSignup = () => {
                   value={email}
                   className={`form-control ${errors.email ? `is-invalid` : ``}`}
                   onChange={handleEmail}
-                ></input>
-                {errors.email && (
-                  <div className="invalid-feedback">{errors.email}</div>
-                )}
+                />
+                {errors.email && <div className="invalid-feedback">{errors.email}</div>}
               </div>
 
               <div className="form-group mb-2">
@@ -393,14 +742,10 @@ const CustomerSignup = () => {
                   placeholder="Enter mobile number"
                   name="mobile"
                   value={mobile}
-                  className={`form-control ${
-                    errors.mobile ? `is-invalid` : ``
-                  }`}
+                  className={`form-control ${errors.mobile ? `is-invalid` : ``}`}
                   onChange={handleMobile}
-                ></input>
-                {errors.mobile && (
-                  <div className="invalid-feedback">{errors.mobile}</div>
-                )}
+                />
+                {errors.mobile && <div className="invalid-feedback">{errors.mobile}</div>}
               </div>
 
               <div className="form-group mb-2">
@@ -411,10 +756,8 @@ const CustomerSignup = () => {
                   value={date}
                   className={`form-control ${errors.date ? `is-invalid` : ``}`}
                   onChange={handleDate}
-                ></input>
-                {errors.date && (
-                  <div className="invalid-feedback">{errors.date}</div>
-                )}
+                />
+                {errors.date && <div className="invalid-feedback">{errors.date}</div>}
               </div>
 
               <div className="form-group mb-2">
@@ -424,14 +767,10 @@ const CustomerSignup = () => {
                   placeholder="Enter password"
                   name="password"
                   value={password}
-                  className={`form-control ${
-                    errors.password ? `is-invalid` : ``
-                  }`}
+                  className={`form-control ${errors.password ? `is-invalid` : ``}`}
                   onChange={handlePassword}
-                ></input>
-                {errors.password && (
-                  <div className="invalid-feedback">{errors.password}</div>
-                )}
+                />
+                {errors.password && <div className="invalid-feedback">{errors.password}</div>}
               </div>
 
               <div className="form-group mb-2">
@@ -482,20 +821,17 @@ const CustomerSignup = () => {
                   </label>
                 </div>
 
-                {errors.gender && (
-                  <div className="invalid-feedback">{errors.gender}</div>
-                )}
+                {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}
               </div>
 
               <button className="btn btn-success" onClick={saveCustomer}>
                 Register
               </button>
-              <link path=""></link>
             </form>
           </div>
         </div>
       </div>
-      <br></br>
+      <br />
     </div>
   );
 };

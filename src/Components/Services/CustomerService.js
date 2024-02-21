@@ -9,5 +9,14 @@ export const listCustomers = () => {
 export const createCustomer = (customer) =>
   axios.post(REST_API_BASE_URL, customer);
 
+  export const getCustomer = (customerId) =>
+  axios.get(REST_API_BASE_URL + "/" + customerId);
+
 // export const updateCustomer = (customerId, customer) =>
 //   axios.put(REST_API_BASE_URL, +"/" + customerId, customer);
+
+export const updateCustomer = (customerId, customer) =>
+  axios.put(REST_API_BASE_URL + "/" + customerId, customer);
+
+  export const deleteCustomer = (customerId, customer) =>
+  axios.delete(REST_API_BASE_URL + "/" + customerId);
